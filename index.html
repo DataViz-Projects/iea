@@ -5,382 +5,71 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>IEA - Vehicle range</title>
-
-    <!-- Google fonts reference-->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Sora:wght@100..800&display=swap"
-      rel="stylesheet"
-    />
-
-    <!-- Connecting with D3 library-->
+    <link href="/style.css" rel="stylesheet" />
     <script src="https://d3js.org/d3.v6.min.js"></script>
     <script src="https://unpkg.com/d3-v6-tip@1.0.6/build/d3-v6-tip.js"></script>
   </head>
 
-  <style>
-    html {
-      font-size: 62.5%;
-      -webkit-font-smoothing: antialiased;
-      box-sizing: border-box;
-    }
-
-    *,
-    ::after,
-    ::before {
-      box-sizing: inherit;
-    }
-
-    body {
-      margin: 0;
-      background-color: #fffdfe;
-      font-family: "Sora", serif;
-      font-size: 1.6rem;
-      line-height: 1.4;
-      font-weight: 400;
-      font-style: normal;
-      font-optical-sizing: auto;
-    }
-
-    .container {
-      margin-right: auto;
-      margin-left: auto;
-      padding-right: 30px;
-      padding-left: 30px;
-      width: 100%;
-      max-width: 1200px;
-    }
-
-    .row {
-      display: flex;
-      flex-wrap: wrap;
-      margin-left: -15px;
-      margin-right: -15px;
-    }
-
-    .col {
-      position: relative;
-      width: 100%;
-      min-height: 1px;
-      padding-right: 15px;
-      padding-left: 15px;
-      flex-basis: 0;
-      flex-grow: 1;
-      max-width: 100%;
-    }
-
-    .col-9 {
-      flex: 0 0 75%;
-      max-width: 75%;
-    }
-
-    .headline {
-      margin-top: 30px;
-      margin-bottom: 10px;
-      font-size: 2.1rem;
-      margin-left: 0px;
-      font-weight: 600;
-    }
-
-    .headline2 {
-      margin-bottom: 10px;
-      margin-top: 0px;
-      margin-left: 0px;
-      font-weight: 400;
-      font-size: 1.7rem;
-      display: inline-block;
-      vertical-align: top;
-      text-align: justify;
-      line-height: 100%;
-    }
-
-    p {
-      margin: 1.2rem 0;
-    }
-
-    a {
-      color: #011040;
-      text-decoration: none;
-      box-shadow: inset 0 -2px 0 0 #0000ff;
-      transition: box-shadow 0.2s ease-out;
-    }
-
-    a:hover,
-    a:focus {
-      color: white;
-      box-shadow: inset 0 -18px 0 0 #0000ff;
-      transition-timing-function: ease-in;
-    }
-
-    .source {
-      padding: 60px 0 10px;
-      font-size: 1rem;
-      color: #011040;
-    }
-
-    @media screen and (max-width: 820px) {
-      .col {
-        margin-bottom: 30px;
-        flex: 0 0 100%;
-        max-width: 100%;
-      }
-    }
-
-    .responsive-svg-container {
-      width: 100%;
-      max-width: 800px;
-    }
-
-    .legend {
-      font-weight: 300;
-      font-size: 1.2rem;
-      text-align: center;
-      fill: #011040;
-    }
-
-    .tooltip {
-      background-color: white;
-      font-weight: 300;
-      font-size: 1.2rem;
-      margin-left: 100;
-      padding: 10px;
-      gap: 8px;
-      display: flex;
-      flex-direction: row;
-      align-items: right;
-      text-align: center;
-      color: #011040;
-      background-color: #ffffff;
-      box-shadow: 0.5px 1px 2px #0000ff;
-      border-radius: 10px;
-      line-height: 1.4;
-    }
-
-    .cat_circle0,
-    .cat_circle1,
-    .cat_circle2,
-    .cat_circle20,
-    .cat_circle21 {
-      fill-opacity: 1;
-      stroke-opacity: 0;
-      stroke-width: 1px;
-      stroke: #011040;
-      stroke-dasharray: 0;
-    }
-
-    .cat_circle0:hover,
-    .cat_circle1:hover,
-    .cat_circle2:hover,
-    .cat_circle20:hover,
-    .cat_circle21:hover {
-      stroke-opacity: 1;
-      fill-opacity: 0;
-    }
-
-    .text {
-      font-size: 1.5rem;
-      font-weight: 500;
-      fill-opacity: 1;
-      fill: #011040;
-      text-align: left;
-    }
-
-    .x-axis text {
-      font-weight: 300;
-      font-size: 1.2rem;
-      text-align: center;
-      color: #011040;
-    }
-
-    .text-axis {
-      font-weight: 300;
-      font-size: 1.2rem;
-      text-align: center;
-      color: #011040;
-    }
-
-    .x-axis path {
-      fill: none;
-      stroke-width: 0;
-      stroke-opacity: 1;
-      stroke: white;
-    }
-
-    .x-axis line {
-      fill: none;
-      stroke-width: 0;
-      stroke-opacity: 1;
-      stroke: #011040;
-      stroke-dasharray: 0;
-    }
-  </style>
-
   <body>
     <div class="container">
-      <h1 class="headline">IEA | Fuel vs. electric vehicle range</h1>
+        <!-- Header-->  
+      <h1 class="headline">        
+        <img src="/International-energy-agency-logo.png"
+        alt="Example Image"
+        width="55"
+        class="image"/>Trade vehicle range</h1>
       <div class="row">
         <div class="col col-9">
           <h2 class="headline2">
-            Comparison of vehicle 🚛 range by region, year and type
+            Comparison of vehicle range by region, year, type and technology
           </h2>
-          <div class="responsive-svg-container">
+          <!-- Chart-->  
+          <div class="responsive-svg-container"> 
             <div id="chart"></div>
           </div>
         </div>
-      </div>
-
-      <div class="source">
-        Data source:
+      </div>  
+      <!-- Footer-->
+      <div class="source"> 
+        <p class="headline3"> <strong>How to use the chart</strong>  
+        </br>A short animation starts automatically to showcase all categories. To replay the animation, please reload the page. 
+       </br>You can interact with the chart by clicking on the blue circles and hover over lightblue rectangle to receive detailed inforamtion. 
+        </p>
+        <p>Data source:
         <a href="https://www.iea.org/">International Energy Agency</a>
+      </p> 
       </div>
-    </div>
 
     <script>
+
+      //Colors from the EIA webpage
       let color_blue = "#0000ff";
       let color_black = "#011040";
       let color_light_blue = "#49d3ff";
-      let color_green = "#cdf8e2";
 
-      const margin = { top: 120, right: 160, bottom: 40, left: 10 };
+      //Margins
+      const margin = { top: 90, right: 190, bottom: 40, left: 10 };
       const width = 1000;
       const height = 720;
       const innerWidth = width - margin.left - margin.right;
       const innerHeight = height - margin.top - margin.bottom;
 
+      //Outer container 
       const svg = d3
         .select("#chart")
         .append("svg")
         .attr("viewBox", `0, 0, ${width}, ${height}`);
 
+      //Inner chart container  
       const innerChart = svg
         .append("g")
         .attr("transform", `translate(${margin.left}, ${margin.top})`);
 
+      //Circle filter menu
       let cat_keys1 = ["Region", "Year", "Category"];
       let cat_keys2 = ["Tecnology", "Type"];
 
-      let Buttons = svg
-        .append("g")
-        .classed("buttons", true)
-        .attr("transform", "translate(0,-70)");
-
-      Buttons.append("rect")
-        .classed("switch_rect", true)
-        .attr("x", 10)
-        .attr("y", 10)
-        .attr("width", "35px")
-        .attr("height", "15px")
-        .attr("rx", "8px")
-        .attr("ry", "8px")
-        .style("fill", "black")
-        .style("fill-opacity", 1);
-
-      let showCat = function (d) {
-        d3.select(this).transition().duration(200).style("opacity", 0);
-
-        d3.select("circle.off_circle")
-          .transition()
-          .duration(200)
-          .style("opacity", 1);
-
-        d3.select("rect.switch_rect")
-          .transition()
-          .duration(200)
-          .style("fill", color_blue);
-
-        d3.select(".button_text")
-          .transition()
-          .duration(200)
-          .text("ON")
-          .attr("x", -3)
-          .attr("y", 3);
-
-        d3.selectAll("circle.id_all").transition().duration(600).attr("r", 20);
-
-        d3.select("g.filter")
-          .transition()
-          .duration(600)
-          .style("visibility", "visible");
-
-        d3.select("g.filter2")
-          .transition()
-          .duration(600)
-          .style("visibility", "visible");
-      };
-
-      let hideCat = function (d) {
-        d3.select(this).transition().duration(200).style("opacity", 0);
-
-        d3.select("circle.on_circle")
-          .transition()
-          .duration(200)
-          .style("opacity", 1);
-
-        d3.select("rect.switch_rect")
-          .transition()
-          .duration(200)
-          .style("fill", "grey");
-
-        d3.select(".button_text")
-          .transition()
-          .duration(200)
-          .text("OFF")
-          .attr("x", 9.4)
-          .attr("y", 2.8);
-
-        d3.selectAll("circle.id_all")
-          .transition()
-          .duration(600)
-          .style("opacity", 0)
-          .attr("r", 0);
-
-        d3.select("g.filter")
-          .transition()
-          .duration(600)
-          .style("visibility", "hidden");
-
-        d3.select("g.filter2")
-          .transition()
-          .duration(600)
-          .style("visibility", "hidden");
-      };
-
-      Buttons.append("circle")
-        .classed("on_circle", true)
-        .attr("cx", 0)
-        .attr("cy", 0)
-        .attr("r", "4px")
-        .style("fill", "white")
-        .style("opacity", 0)
-        .on("click", showCat);
-
-      Buttons.append("circle")
-        .classed("off_circle", true)
-        .attr("class", "off_circle")
-        .attr("cx", 18)
-        .attr("cy", 0)
-        .attr("r", "4px")
-        .style("fill", "white")
-        .style("opacity", 1)
-        .on("click", hideCat);
-
-      Buttons.append("text")
-        .attr("class", "legend")
-        .attr("x", 0)
-        .attr("y", 0)
-        .text("Show menu");
-
-      Buttons.append("text")
-        .classed("button_text", true)
-        .attr("class", "legend")
-        .attr("x", 0)
-        .attr("y", 0)
-        .style("fill", "white")
-        .style("opacity", 1)
-        .text("ON");
-
-      let r = 4.5;
+      let r = 4.7;
 
       let filter = svg
         .append("g")
@@ -399,7 +88,7 @@
             .attr("cy", i * 16)
             .attr("cx", 0)
             .attr("r", r)
-            .attr("fill", color_black);
+            .attr("fill", color_blue);
 
           d3.select(this)
             .append("text")
@@ -428,7 +117,7 @@
             .attr("cy", i * 16)
             .attr("cx", 0)
             .attr("r", r)
-            .attr("fill", color_black);
+            .attr("fill", color_blue);
 
           d3.select(this)
             .append("text")
@@ -440,21 +129,23 @@
             .attr("transform", `translate(7, 1)`);
         });
 
+      //Data formating and loading
       formatNumber = d3.format(".2s");
 
       const data = d3.csv("data_final.csv", d3.autoType).then(function (data) {
+        
+          //Tooltip
         const tooltip = d3
           .tip()
           .attr("class", "tooltip")
           .html(
             (event, d) =>
-              `<div>Country ${d.region}<br>Range ${formatNumber(
-                d.range
-              )}</br>Technology ${d.technology}<br>Year ${d.year}</br></div>`
+              `<div>Range ${formatNumber( d.range)}</br>${d.region}<br>Year ${d.year}<br> ${d.category}<br>${d.vehicle_type}<br>${d.technology}</div>`
           );
 
         innerChart.call(tooltip);
 
+        //Scales
         let padding = 0.1;
         let x = d3.scaleLinear().domain([0, 1350]).range([0, innerWidth]);
         let c = d3
@@ -462,7 +153,7 @@
           .domain(["Fuel Cell", "Electric"])
           .range(["green", "blue"]);
 
-        //Region
+        //Y Region
         let region = data.map((d) => d.region).sort();
         let number_region = d3.rollups(
           data,
@@ -475,7 +166,7 @@
           .range([innerHeight, 0])
           .padding(padding);
 
-        //Year
+        //Y Year
         let year = data.map((d) => d.year).sort();
         let number_year = d3.rollups(
           data,
@@ -488,7 +179,7 @@
           .range([innerHeight, 0])
           .padding(padding);
 
-        //Category
+        //Y Category
         let category = data.map((d) => d.category).sort();
         let number_category = d3.rollups(
           data,
@@ -501,7 +192,7 @@
           .range([innerHeight, 0])
           .padding(padding);
 
-        //Category
+        //Y Category
         let technology = data.map((d) => d.technology).sort();
         let number_technology = d3.rollups(
           data,
@@ -514,7 +205,7 @@
           .range([innerHeight, 0])
           .padding(padding);
 
-        //Type
+        //Y Type
         let type = data.map((d) => d.vehicle_type).sort();
         let number_type = d3.rollups(
           data,
@@ -527,6 +218,7 @@
           .range([innerHeight, 0])
           .padding(padding);
 
+        //Drawing bars and text with animation 
         let duration = 1000;
         let delay = 600;
 
@@ -628,7 +320,7 @@
           .text((d) => d[0])
           .transition()
           .delay(delay * 15)
-          .duration(duration * 3)
+          .duration(duration * 3.5)
           .attr("opacity", 1)
           .transition()
           .duration(1000)
@@ -648,7 +340,7 @@
           .text((d) => d[0])
           .transition()
           .delay(delay * 22)
-          .duration(duration * 3)
+          .duration(duration * 3.5)
           .attr("opacity", 1)
           .transition()
           .duration(1000)
@@ -668,12 +360,13 @@
           .text((d) => d[0])
           .transition()
           .delay(delay * 28)
-          .duration(duration * 3)
+          .duration(duration * 3.5)
           .attr("opacity", 1)
           .transition()
           .duration(1000)
           .attr("opacity", 0);
 
+        //X axis
         const xAxis = innerChart
           .append("g")
           .attr("transform", `translate(0, ${innerHeight})`)
@@ -699,9 +392,10 @@
           .append("text")
           .attr("class", "text-axis")
           .text("Range in km")
-          .attr("y", 715.5)
+          .attr("y", 710)
           .attr("x", 0);
 
+        //Click events 
         let x_postion = 6;
 
         //Region
@@ -845,5 +539,6 @@
         });
       });
     </script>
+    
   </body>
 </html>
