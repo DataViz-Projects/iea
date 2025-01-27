@@ -2,7 +2,7 @@
     font-family: "Graphik";
     font-style: normal;
     font-weight: 400;
-    src: url(fonts/Graphik-Regular.woff2)format("woff2");
+    src: url(/Graphik-Regular.woff2)format("woff2");
     font-display: swap
 }
 
@@ -10,21 +10,21 @@
     font-family: "Graphik";
     font-style: italic;
     font-weight: 400;
-    src: url(/fonts/Graphik-RegularItalic.woff2)format("woff2");
+    src: url(/Graphik-RegularItalic.woff2)format("woff2");
     font-display: swap
 }
 
 @font-face {
   font-family: "Graphik";
   font-weight: 500;
-  src: url(/fonts/Graphik-Medium.woff2)format("woff2");
+  src: url(/Graphik-Medium.woff2)format("woff2");
   font-display: swap
 }
 
 @font-face {
   font-family: "Graphik";
   font-weight: 700;
-  src: url(fonts/Graphik-Semibold.woff2)format("woff2");
+  src: url(/Graphik-Semibold.woff2)format("woff2");
   font-display: swap
 }
 
